@@ -1,21 +1,25 @@
-import 'package:flutter_app_starter/Features/Court/statistic_model.dart';
 import 'package:get/get.dart';
 
 import '../../Utils/loading_statud.dart';
+import 'employee_model.dart';
 import 'employee_services.dart';
 
 class EmployeeController extends GetxController {
+  EmployeeListModel? employeeList = EmployeeListModel.fromJson({
+    "status": LoadingStatus.NOT_STARTED,
+    "page": 1,
+    "last_page": 1,
+    "list": [],
+  });
 // ========================================
-// =========== Login ================
+// =========== Load List OF Employees ================
 // ========================================
 
-  StatisticModel? statistic = StatisticModel.fromJson({
-    "status": LoadingStatus.NOT_STARTED,
-  });
-  Future loadStatistic() async {
-    statistic!.status = LoadingStatus.IN_PROGRESS;
+  Future loadEmployeeList() async {
+    employeeList!.status = LoadingStatus.IN_PROGRESS;
     update();
-    statistic = await EmployeeAPI().loadStatisticAPI();
+
+    employeeList = await EmployeeAPI().loadEmployeeListAPI(1, 2);
     update();
   }
 }

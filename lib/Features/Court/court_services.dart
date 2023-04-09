@@ -20,8 +20,9 @@ class CourtAPI extends SharedApi {
       if (data.statusCode == 200) {
         jsonData['data']['status'] = LoadingStatus.DONE;
         return StatisticModel.fromJson(jsonData['data']);
-      }
-      if (data.statusCode == 401) {
+      } else if (data.statusCode == 204) {
+        return StatisticModel.fromJson({"status": LoadingStatus.EMPTY});
+      } else if (data.statusCode == 401) {
         Logout().logout();
         return StatisticModel.fromJson({"status": LoadingStatus.NOT_AUTH});
       } else {

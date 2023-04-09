@@ -1,21 +1,21 @@
 import '../../Utils/loading_statud.dart';
 
-class StatisticModel {
+class EmployeeListModel {
   LoadingStatus? status = LoadingStatus.NOT_STARTED;
   int? page = 1;
   int? Count = 1;
   int? last_page = 1;
   final List<EmployeeItemModel>? list;
 
-  StatisticModel({
+  EmployeeListModel({
     this.status,
     this.list,
     this.page,
     this.last_page,
   });
 
-  factory StatisticModel.fromJson(Map<String, dynamic> jsonData) {
-    return StatisticModel(
+  factory EmployeeListModel.fromJson(Map<String, dynamic> jsonData) {
+    return EmployeeListModel(
       status: jsonData['status'],
       page: jsonData['page'],
       last_page: jsonData['last_page'],

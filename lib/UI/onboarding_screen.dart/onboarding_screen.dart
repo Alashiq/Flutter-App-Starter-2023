@@ -55,7 +55,7 @@ class OnBoardingScreen extends StatelessWidget {
                       child: controller.onboarding != 2
                           ? InkWell(
                               onTap: () {
-                                Get.offNamed("/login");
+                                controller.endBoarding();
                               },
                               child: Text(
                                 "تخطي",

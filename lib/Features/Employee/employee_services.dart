@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_app_starter/Features/Court/statistic_model.dart';
+import 'package:flutter_app_starter/Features/Employee/employee_model.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
 import 'package:flutter_app_starter/Widgets/errorMessage.dart';
 
@@ -9,28 +10,51 @@ import '../../Utils/loading.dart';
 import '../../Utils/loading_statud.dart';
 
 class EmployeeAPI extends SharedApi {
-  // Login API
-  Future<StatisticModel> loadStatisticAPI() async {
+  Future<EmployeeListModel> loadEmployeeListAPI(int page, int count) async {
     try {
       showLoading();
-      await Future.delayed(Duration(milliseconds: 1000), () {});
-      var data = await SharedApi().getAuth(urlPath: 'home');
+      var data = await SharedApi().getAuth(
+          urlPath:
+              'employee?page=${page.toString()}&count=${count.toString()}');
       stopLoading();
-      var jsonData = json.decode(data.body);
       if (data.statusCode == 200) {
-        jsonData['data']['status'] = LoadingStatus.DONE;
-        return StatisticModel.fromJson(jsonData['data']);
-      }
-      if (data.statusCode == 401) {
+        var jsonData = json.decode(data.body);
+
+        return EmployeeListModel.fromJson({
+          "status": LoadingStatus.DONE,
+          "list": jsonData['data']['data'],
+        });
+      } else if (data.statusCode == 401) {
         Logout().logout();
-        return StatisticModel.fromJson({"status": LoadingStatus.NOT_AUTH});
+        return EmployeeListModel.fromJson({
+          "status": LoadingStatus.NOT_AUTH,
+          "page": 0,
+          "last_page": 1,
+          "list": [],
+        });
+      } else if (data.statusCode == 204) {
+        return EmployeeListModel.fromJson({
+          "status": LoadingStatus.EMPTY,
+          "page": 0,
+          "last_page": 1,
+          "list": [],
+        });
       } else {
-        showErrorMessage(jsonData['message']);
-        return StatisticModel.fromJson({"status": LoadingStatus.BAD_REQUEST});
+        return EmployeeListModel.fromJson({
+          "status": LoadingStatus.BAD_REQUEST,
+          "page": 0,
+          "last_page": 1,
+          "list": [],
+        });
       }
     } on Exception catch (_) {
       stopLoading();
-      return StatisticModel.fromJson({"status": LoadingStatus.NO_INTERNET});
+      return EmployeeListModel.fromJson({
+        "status": LoadingStatus.NO_INTERNET,
+        "page": 0,
+        "last_page": 1,
+        "list": [],
+      });
     }
   }
 }
