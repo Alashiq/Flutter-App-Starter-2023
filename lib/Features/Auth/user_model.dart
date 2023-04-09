@@ -29,4 +29,39 @@ class UserModel {
       role: jsonData['role'] ?? '',
     );
   }
+
+  bool isNotStarted() {
+    if (status!.value == 0) return true;
+    return false;
+  }
+
+  bool isLoading() {
+    if (status!.value == 1) return true;
+    return false;
+  }
+
+  bool isLoadSuccess() {
+    if (status!.value == 200) return true;
+    return false;
+  }
+
+  bool isEmpty() {
+    if (status!.value == 204) return true;
+    return false;
+  }
+
+  bool isBadRequest() {
+    if (status!.value == 400) return true;
+    return false;
+  }
+
+  bool isNotAuth() {
+    if (status!.value == 401) return true;
+    return false;
+  }
+
+  bool isNoInternet() {
+    if (status!.value == 404) return true;
+    return false;
+  }
 }

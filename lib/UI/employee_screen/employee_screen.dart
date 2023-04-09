@@ -4,7 +4,9 @@ import 'package:flutter_app_starter/SharedWidgets/no_network.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
 import 'package:get/get.dart';
 
+import '../../Features/Employee/employee_model.dart';
 import '../../SharedWidgets/auto_load.dart';
+import '../../Utils/loading_statud.dart';
 import '../../Widgets/bottom_bar.dart';
 
 class EmployeeScreen extends StatelessWidget {
@@ -32,24 +34,51 @@ class EmployeeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: GetBuilder<EmployeeController>(
                   builder: (controller) => AutoLoad(
-                    onInit: controller.loadEmployeeList,
+                    onInit: () {
+                      controller.employeeList = EmployeeListModel.fromJson({
+                        "status": LoadingStatus.NOT_STARTED,
+                        "page": 1,
+                        "last_page": 1,
+                        "list": [],
+                      });
+                      controller.update();
+                      controller.loadEmployeeList();
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       child: controller.employeeList!.isLoading()
                           ? Text("Loading")
-                          : controller.employeeList!.isLoadSuccess()
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const ScrollPhysics(),
-                                  itemCount:
-                                      controller.employeeList!.list!.length,
-                                  itemBuilder: (context, i) {
-                                    return ListTile(
-                                      title: Text(controller
-                                              .employeeList!.list![i].name ??
-                                          "Empty"),
-                                    );
-                                  },
+                          : controller.employeeList!.isLoadSuccess() ||
+                                  controller.employeeList!.isSecondLoading()
+                              ? Column(
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const ScrollPhysics(),
+                                      itemCount:
+                                          controller.employeeList!.list!.length,
+                                      itemBuilder: (context, i) {
+                                        return ListTile(
+                                          title: Text(controller.employeeList!
+                                                  .list![i].name ??
+                                              "Empty"),
+                                        );
+                                      },
+                                    ),
+                                    Text(controller.employeeList?.last_page
+                                            .toString() ??
+                                        "0"),
+                                    Text(controller.employeeList?.Count
+                                            .toString() ??
+                                        "0"),
+                                    controller.employeeList!.isSecondLoading()
+                                        ? CircularProgressIndicator()
+                                        : ElevatedButton(
+                                            onPressed: () {
+                                              controller.loadEmployeeList();
+                                            },
+                                            child: Text("Next"))
+                                  ],
                                 )
                               : controller.employeeList!.isEmpty()
                                   ? Text("Empty")

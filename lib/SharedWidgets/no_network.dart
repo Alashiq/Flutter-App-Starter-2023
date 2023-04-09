@@ -12,7 +12,6 @@ class NoNetwork extends StatelessWidget {
     return Container(
       color: Colors.white,
       width: double.infinity,
-      height: double.infinity,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

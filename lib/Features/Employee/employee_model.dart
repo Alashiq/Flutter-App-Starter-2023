@@ -40,6 +40,11 @@ class EmployeeListModel {
     return false;
   }
 
+  bool isSecondLoading() {
+    if (status!.value == 2) return true;
+    return false;
+  }
+
   bool isEmpty() {
     if (status!.value == 204) return true;
     return false;

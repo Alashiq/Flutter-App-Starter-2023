@@ -1,6 +1,7 @@
 enum LoadingStatus {
   NOT_STARTED("البداية", 0),
   IN_PROGRESS("قيد التحميل", 1),
+  IN_SECOND_PROGRESS("قيد التحميل الثاني", 2),
   DONE("تم التحميل", 200),
   EMPTY("القائمة فارغة", 204),
   BAD_REQUEST("حدث خطأ ما", 400),
