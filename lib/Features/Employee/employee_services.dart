@@ -33,7 +33,8 @@ class EmployeeAPI extends SharedApi {
           "list": [],
         });
       } else if (data.statusCode == 204) {
-        Get.snackbar("تنبيه", "وصلت لنهاية القائمة",
+        Get.snackbar(
+            "تنبيه", page == 1 ? "لايوجد اي عناصر" : "وصلت لنهاية القائمة",
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Color(0xff6a6a6a),
             colorText: Colors.white);

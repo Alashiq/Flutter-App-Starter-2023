@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_app_starter/Features/Auth/user_model.dart';
+import 'package:flutter_app_starter/SharedWidgets/internetMessage.dart';
 import 'package:flutter_app_starter/Widgets/errorMessage.dart';
 
 import '../../Utils/api.dart';
@@ -30,6 +31,7 @@ class AuthAPI extends SharedApi {
       }
     } on Exception catch (_) {
       stopLoading();
+      showInternetMessage("تأكد من إتصالك بالإنترنت");
       return UserModel.fromJson({"status": LoadingStatus.NO_INTERNET});
     }
   }
@@ -53,6 +55,7 @@ class AuthAPI extends SharedApi {
       }
     } on Exception catch (_) {
       stopLoading();
+      showInternetMessage("تأكد من إتصالك بالإنترنت");
       return UserModel.fromJson({"status": LoadingStatus.NO_INTERNET});
     }
   }

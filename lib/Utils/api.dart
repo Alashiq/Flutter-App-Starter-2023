@@ -5,7 +5,7 @@ import '../Features/Auth/auth_controller.dart';
 
 class SharedApi {
   String imageUrl = "https://cloudsoft.ly/api/";
-  String baseUrl = "http://10.100.106.215:8000/admin/api/";
+  String baseUrl = "http://192.168.0.3:8000/admin/api/";
 
   Map<String, String> getToken() {
     AuthController authController = Get.find();

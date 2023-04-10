@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_starter/Features/Employee/employee_controller.dart';
+import 'package:flutter_app_starter/SharedWidgets/empty_box.dart';
 import 'package:flutter_app_starter/SharedWidgets/no_network.dart';
 import 'package:flutter_app_starter/SharedWidgets/reload_inside.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
@@ -86,7 +87,9 @@ class EmployeeScreen extends StatelessWidget {
                                   ],
                                 )
                               : controller.employeeList!.isEmpty()
-                                  ? Text("Empty")
+                                  ? EmptyBox(
+                                      onInit: controller.loadEmployeeList,
+                                      height: screenHeight(context, 128))
                                   : controller.employeeList!.isNoInternet()
                                       ? NoNetwork(
                                           onInit: controller.loadEmployeeList,
