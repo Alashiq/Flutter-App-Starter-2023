@@ -114,6 +114,10 @@ flutter:
     fonts:
       - asset: fonts/Monadi.ttf
         weight: 400
+  - family: Swissra-Light
+    fonts:
+      - asset: fonts/Swissra-Light.otf
+        weight: 400
   - family: Swissra-Normal
     fonts:
       - asset: fonts/Swissra-Normal.ttf
@@ -129,3 +133,6 @@ flutter:
   - family: Adelle
     fonts:
       - asset: fonts/Adelle Sans ARA Regular.ttf
+  - family: JF-Flat
+    fonts:
+      - asset: fonts/JF-Flat-regular.ttf

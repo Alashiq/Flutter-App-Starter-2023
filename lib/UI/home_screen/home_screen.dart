@@ -3,7 +3,6 @@ import 'package:flutter_app_starter/Features/Court/court_controller.dart';
 import 'package:flutter_app_starter/SharedWidgets/no_network.dart';
 import 'package:flutter_app_starter/SharedWidgets/reload_inside.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
-import 'package:flutter_app_starter/ViewModels/start_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../SharedWidgets/auto_load.dart';
@@ -20,7 +19,10 @@ class HomeScreen extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("الرئيسية"),
+          title: Text(
+            "الرئيسية",
+            style: TextStyle(fontFamily: 'Swissra-Light'),
+          ),
           actions: [
             IconButton(
                 onPressed: () {
