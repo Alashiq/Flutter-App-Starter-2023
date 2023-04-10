@@ -13,7 +13,7 @@ class AuthController extends GetxController {
 // ========================================
   booting() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
-    // removeString("onboarding");
+    removeString("onboarding");
     if (await loadString("onboarding") == null)
       Get.offAndToNamed("/onboarding");
     else
