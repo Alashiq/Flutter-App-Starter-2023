@@ -14,10 +14,8 @@ class CourtAPI extends SharedApi {
   // Login API
   Future<StatisticModel> loadStatisticAPI() async {
     try {
-      showLoading();
       await Future.delayed(Duration(milliseconds: 1000), () {});
       var data = await SharedApi().getAuth(urlPath: 'home');
-      stopLoading();
       var jsonData = json.decode(data.body);
       if (data.statusCode == 200) {
         jsonData['data']['status'] = LoadingStatus.DONE;
@@ -32,7 +30,6 @@ class CourtAPI extends SharedApi {
         return StatisticModel.fromJson({"status": LoadingStatus.BAD_REQUEST});
       }
     } on Exception catch (_) {
-      stopLoading();
       return StatisticModel.fromJson({"status": LoadingStatus.NO_INTERNET});
     }
   }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_starter/Features/Employee/employee_controller.dart';
 import 'package:flutter_app_starter/SharedWidgets/no_network.dart';
+import 'package:flutter_app_starter/SharedWidgets/reload_inside.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
 import 'package:get/get.dart';
 
 import '../../Features/Employee/employee_model.dart';
 import '../../SharedWidgets/auto_load.dart';
+import '../../SharedWidgets/something_wrong.dart';
 import '../../Utils/loading_statud.dart';
 import '../../Utils/screen_size.dart';
 import '../../Widgets/bottom_bar.dart';
@@ -48,7 +50,9 @@ class EmployeeScreen extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       child: controller.employeeList!.isLoading()
-                          ? Text("Loading")
+                          ? ReloadInside(
+                              height: screenHeight(context, 128),
+                            )
                           : controller.employeeList!.isLoadSuccess() ||
                                   controller.employeeList!.isSecondLoading()
                               ? Column(
@@ -87,7 +91,10 @@ class EmployeeScreen extends StatelessWidget {
                                       ? NoNetwork(
                                           onInit: controller.loadEmployeeList,
                                           height: screenHeight(context, 128))
-                                      : Text("Faild"),
+                                      : SomethingWrong(
+                                          onInit: controller.loadEmployeeList,
+                                          height: screenHeight(context, 128),
+                                        ),
                     ),
                   ),
                 ),

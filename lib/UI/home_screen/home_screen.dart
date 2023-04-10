@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_starter/Features/Court/court_controller.dart';
 import 'package:flutter_app_starter/SharedWidgets/no_network.dart';
+import 'package:flutter_app_starter/SharedWidgets/reload_inside.dart';
 import 'package:flutter_app_starter/Utils/logout.dart';
 import 'package:flutter_app_starter/ViewModels/start_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../SharedWidgets/auto_load.dart';
+import '../../SharedWidgets/something_wrong.dart';
 import '../../Utils/screen_size.dart';
 import '../../Widgets/bottom_bar.dart';
 
@@ -38,7 +40,9 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       child: controller.statistic!.isLoading()
-                          ? Text("Loading")
+                          ? ReloadInside(
+                              height: screenHeight(context, 128),
+                            )
                           : controller.statistic!.isLoadSuccess()
                               ? DashboardList()
                               : controller.statistic!.isNoInternet()
@@ -46,7 +50,10 @@ class HomeScreen extends StatelessWidget {
                                       onInit: controller.loadStatistic,
                                       height: screenHeight(context, 128),
                                     )
-                                  : Text("Faild"),
+                                  : SomethingWrong(
+                                      onInit: controller.loadStatistic,
+                                      height: screenHeight(context, 128),
+                                    ),
                     ),
                   ),
                 ),
