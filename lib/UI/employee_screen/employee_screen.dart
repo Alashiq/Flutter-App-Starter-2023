@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../Features/Employee/employee_model.dart';
 import '../../SharedWidgets/auto_load.dart';
 import '../../Utils/loading_statud.dart';
+import '../../Utils/screen_size.dart';
 import '../../Widgets/bottom_bar.dart';
 
 class EmployeeScreen extends StatelessWidget {
@@ -84,7 +85,8 @@ class EmployeeScreen extends StatelessWidget {
                                   ? Text("Empty")
                                   : controller.employeeList!.isNoInternet()
                                       ? NoNetwork(
-                                          onInit: controller.loadEmployeeList)
+                                          onInit: controller.loadEmployeeList,
+                                          height: screenHeight(context, 128))
                                       : Text("Faild"),
                     ),
                   ),

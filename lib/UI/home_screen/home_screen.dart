@@ -6,6 +6,7 @@ import 'package:flutter_app_starter/ViewModels/start_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../SharedWidgets/auto_load.dart';
+import '../../Utils/screen_size.dart';
 import '../../Widgets/bottom_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -41,7 +42,10 @@ class HomeScreen extends StatelessWidget {
                           : controller.statistic!.isLoadSuccess()
                               ? DashboardList()
                               : controller.statistic!.isNoInternet()
-                                  ? NoNetwork(onInit: controller.loadStatistic)
+                                  ? NoNetwork(
+                                      onInit: controller.loadStatistic,
+                                      height: screenHeight(context, 128),
+                                    )
                                   : Text("Faild"),
                     ),
                   ),
